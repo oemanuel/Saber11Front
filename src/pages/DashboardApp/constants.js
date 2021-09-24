@@ -1,0 +1,2 @@
+export const OBTENER_TOP_COLEGIOS = 'app/dashboard/OBTENER_TOP_COLEGIOS'
+export const OBTENER_TOP_COLEGIOS_SUCCESS = 'app/dashboard/OBTENER_TOP_COLEGIOS_SUCCESS'
