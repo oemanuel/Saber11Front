@@ -1,7 +1,16 @@
+import { useEffect, useState } from 'react'
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { compose } from 'redux';
+
+import { makeSelectTopColegios } from './selectors'
+import { obtenerTopColegios } from './actions'
+
 // material
 import { Box, Grid, Container, Typography } from '@material-ui/core';
 // components
-import Page from '../components/Page';
+import Page from '../../components/Page';
 import {
   AppTasks,
   AppNewUsers,
@@ -15,11 +24,19 @@ import {
   AppTrafficBySite,
   AppCurrentSubject,
   AppConversionRates
-} from '../components/_dashboard/app';
+} from '../../components/_dashboard/app';
 
 // ----------------------------------------------------------------------
 
-export default function DashboardApp() {
+export function DashboardApp({ topColegios, handleObtenerTopColegios }) {
+  const { x, setX } = useState([])
+  const { Y, setY } = useState([])
+  useEffect(() => {
+    if (topColegios === undefined) {
+      handleObtenerTopColegios()
+    }
+  }, [topColegios])
+
   return (
     <Page title="Tu Saber 11°">
       <Container maxWidth="xl">
@@ -76,3 +93,27 @@ export default function DashboardApp() {
     </Page>
   );
 }
+
+DashboardApp.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  topColegios: PropTypes.object,
+  handleObtenerTopColegios: PropTypes.func
+}
+
+const mapStateToProps = createStructuredSelector({
+  topColegios: makeSelectTopColegios(),
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+    handleObtenerTopColegios: () => dispatch(obtenerTopColegios())
+  }
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+
+export default compose(withConnect)(DashboardApp);
