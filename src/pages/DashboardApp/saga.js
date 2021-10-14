@@ -4,12 +4,11 @@ import { makeSelectperiodo, makeSelecttopNumero, makeSelectnumeroEstudiantes } f
 import { OBTENER_TOP_COLEGIOS, OBTENER_MUNICIPIOS } from './constants'
 import { obtenerTopColegiosSuccess, obtenerMunicipiosSuccess } from './actions'
 
-const baseUrl = 'http://127.0.0.1:5000'
-const endPoint = '/mejores-colegios'
-const URL = baseUrl + endPoint;
+const baseUrl = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_BASE_URL : process.env.REACT_APP_BASE_URL_DEV
+
 function obtenerTopColegios(consulta) {
     return axios
-        .get(URL, { params: consulta })
+        .get(baseUrl + '/mejores-colegios', { params: consulta })
         .then(response => ({ response }))
         .catch(error => ({ error }));
 }
@@ -28,15 +27,14 @@ function* TopColegiosSaga() {
     else console.log(error)
 }
 
-function obtenerMunucipios() {
+function obtenerMunucipios(periodo) {
     return axios
-        .get('https://raw.githubusercontent.com/marcovega/colombia-json/master/colombia.min.json')
+        .get(baseUrl + '/datos-generales/departamentos-municipios-cole', { params: { periodo: periodo } })
         .then(response => ({ response }))
         .catch(error => ({ error }));
 }
 function* apimunicipiosSaga() {
-    const { response, error } = yield call(obtenerMunucipios)
-    console.log(response.data)
+    const { response, error } = yield call(obtenerMunucipios, yield select(makeSelectperiodo()))
     if (response) yield put(obtenerMunicipiosSuccess(response.data))
     else console.log(error)
 }

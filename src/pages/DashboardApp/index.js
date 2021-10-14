@@ -57,10 +57,10 @@ export function DashboardApp({ topColegios,
     if (topColegios === undefined) {
       handleObtenerTopColegios()
     }
-    if (municipiosData === undefined) {
-      handleObtenerMunicipios()
-    }
   })
+  useEffect(() => {
+    handleObtenerMunicipios()
+  }, [periodo, handleObtenerMunicipios])
   return (
     <Page title="Tu Saber 11°">
       <Container maxWidth="xl">
@@ -77,9 +77,14 @@ export function DashboardApp({ topColegios,
                   name='periodo'
                   onChange={handleChange}
                 >
+                  <MenuItem value={20211}>20211</MenuItem>
                   <MenuItem value={20202}>20202</MenuItem>
                   <MenuItem value={20201}>20201</MenuItem>
                   <MenuItem value={20192}>20192</MenuItem>
+                  <MenuItem value={20182}>20182</MenuItem>
+                  <MenuItem value={20181}>20181</MenuItem>
+                  <MenuItem value={20172}>20172</MenuItem>
+                  <MenuItem value={20171}>20171</MenuItem>
                 </Select>
               </FormControl>
               <FormControl sx={{ width: 100 }} >

@@ -7,7 +7,6 @@ export default function Chart({ x, y }) {
     const aux = x.map((element, index) => {
         return "Top #" + (index + 1);
     })
-    console.log(aux)
     return (
         <>
             <Plot
