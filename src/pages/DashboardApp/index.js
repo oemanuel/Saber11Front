@@ -47,6 +47,13 @@ export function DashboardApp({ topColegios,
   useEffect(() => {
     handleObtenerMunicipios()
   }, [periodo, handleObtenerMunicipios])
+
+  const municipiosss = municipiosData?.find(element => element.departamento === departamento)?.ciudades
+  let arrayForSort = [];
+  if (municipiosss !== undefined) {
+    arrayForSort = [...municipiosss]
+    arrayForSort = arrayForSort.sort()
+  }
   return (
     <Page title="Tu Saber 11°">
       <Container maxWidth="xl">
@@ -116,9 +123,7 @@ export function DashboardApp({ topColegios,
                 >
                   <MenuItem value={''}>Ninguno</MenuItem>
                   {
-                    departamento !== '' && (
-                      municipiosData?.find(element => element.departamento === departamento)?.ciudades?.map((item, index) => <MenuItem key={index} value={item}>{item}</MenuItem>)
-                    )
+                    arrayForSort.map((item, index) => <MenuItem key={index} value={item}>{item}</MenuItem>)
                   }
 
                 </Select>
