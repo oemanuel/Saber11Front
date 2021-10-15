@@ -34,7 +34,6 @@ import {
 } from '../../components/_dashboard/app';
 
 // ----------------------------------------------------------------------
-import dataaa from './data.json'
 export function DashboardApp({ topColegios,
   handleObtenerData,
   handleChange,
