@@ -5,7 +5,7 @@ import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 //
 import Login from './pages/Login';
 import Register from './pages/Register';
-import DashboardApp from './pages/DashboardApp';
+import DashboardApp from './pages/DiagramaDeCaja';
 import Products from './pages/Products';
 import Blog from './pages/Blog';
 import User from './pages/User';
