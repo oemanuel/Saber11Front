@@ -105,15 +105,16 @@ export function DashboardApp({ topColegios,
                 </Select>
               </FormControl>
               <FormControl sx={{ width: 300 }}>
-                <InputLabel id="municipios-select-label">Municipios</InputLabel>
+                <InputLabel id="municipios-select-label">Municipio</InputLabel>
                 <Select
                   labelId="municipios-select-label"
                   id="municipios-select"
                   value={municipio}
-                  label="Municipios"
+                  label="Municipio"
                   name="municipios"
                   onChange={handleChange}
                 >
+                  <MenuItem value={''}>Ninguno</MenuItem>
                   {
                     departamento !== '' && (
                       municipiosData?.find(element => element.departamento === departamento)?.ciudades?.map((item, index) => <MenuItem key={index} value={item}>{item}</MenuItem>)

@@ -10,7 +10,7 @@ export const initialState = {
     topNumero: '10',
     numeroEstudiantes: '0',
     departamento: "ATLANTICO",
-    municipio: "BARRANQUILLA"
+    municipio: ""
 };
 
 const dashboardReducer = (state = initialState, action) =>

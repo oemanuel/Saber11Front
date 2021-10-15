@@ -13,10 +13,11 @@ function obtenerTopColegios(consulta) {
         .catch(error => ({ error }));
 }
 function* TopColegiosSaga() {
+    const auxMunicipio = yield select(makeSelectmunicipio())
     const consulta = {
         periodo: yield select(makeSelectperiodo()),
         departamento: yield select(makeSelectdepartamento()),
-        municipio: yield select(makeSelectmunicipio()),
+        municipio: auxMunicipio === '' ? null : auxMunicipio,
         top: yield select(makeSelecttopNumero()),
         num_estudiantes: yield select(makeSelectnumeroEstudiantes())
     }
