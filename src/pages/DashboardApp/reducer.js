@@ -9,8 +9,8 @@ export const initialState = {
     periodo: 20202,
     topNumero: '10',
     numeroEstudiantes: '0',
-    departamento: "",
-    municipio: ""
+    departamento: "ATLANTICO",
+    municipio: "BARRANQUILLA"
 };
 
 const dashboardReducer = (state = initialState, action) =>
@@ -22,7 +22,7 @@ const dashboardReducer = (state = initialState, action) =>
                 action.payload.response.mejoresColegios.forEach(colegio => tempY.push(colegio.nombre?.trim()))
                 draft.mejoresColegiosY = tempY.reverse()
                 const tempX = []
-                action.payload.response.mejoresColegios.forEach(colegio => tempX.push(colegio.puntajePromedio))
+                action.payload.response.mejoresColegios.forEach(colegio => tempX.push(colegio.puntajepromedio))
                 draft.mejoresColegiosX = tempX.reverse()
                 break;
             case CHANGE:

@@ -1,6 +1,6 @@
 import { takeLatest, call, put, select } from 'redux-saga/effects';
 import axios from 'axios'
-import { makeSelectperiodo, makeSelecttopNumero, makeSelectnumeroEstudiantes } from './selectors'
+import { makeSelectperiodo, makeSelecttopNumero, makeSelectnumeroEstudiantes, makeSelectdepartamento, makeSelectmunicipio } from './selectors'
 import { OBTENER_TOP_COLEGIOS, OBTENER_MUNICIPIOS } from './constants'
 import { obtenerTopColegiosSuccess, obtenerMunicipiosSuccess } from './actions'
 
@@ -15,9 +15,8 @@ function obtenerTopColegios(consulta) {
 function* TopColegiosSaga() {
     const consulta = {
         periodo: yield select(makeSelectperiodo()),
-        departamento: null,
-        municipio: null,
-        puntajes: ["PUNT_GLOBAL"],
+        departamento: yield select(makeSelectdepartamento()),
+        municipio: yield select(makeSelectmunicipio()),
         top: yield select(makeSelecttopNumero()),
         num_estudiantes: yield select(makeSelectnumeroEstudiantes())
     }
