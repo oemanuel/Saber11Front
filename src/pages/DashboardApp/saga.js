@@ -1,26 +1,25 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, select } from 'redux-saga/effects';
 import axios from 'axios'
+import { makeSelectperiodo, makeSelecttopNumero, makeSelectnumeroEstudiantes, makeSelectdepartamento, makeSelectmunicipio } from './selectors'
+import { OBTENER_TOP_COLEGIOS, OBTENER_MUNICIPIOS } from './constants'
+import { obtenerTopColegiosSuccess, obtenerMunicipiosSuccess } from './actions'
 
-import { OBTENER_TOP_COLEGIOS } from './constants'
-import { obtenerTopColegiosSuccess } from './actions'
+const baseUrl = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_BASE_URL : process.env.REACT_APP_BASE_URL_DEV
 
-const baseUrl = 'http://127.0.0.1:5000'
-const endPoint = '/mejores-colegios'
-const URL = baseUrl + endPoint;
 function obtenerTopColegios(consulta) {
     return axios
-        .get(URL, { params: consulta })
+        .get(baseUrl + '/mejores-colegios', { params: consulta })
         .then(response => ({ response }))
         .catch(error => ({ error }));
 }
 function* TopColegiosSaga() {
+    const auxMunicipio = yield select(makeSelectmunicipio())
     const consulta = {
-        periodo: 20202,
-        departamento: null,
-        municipio: null,
-        puntajes: ["PUNT_GLOBAL"],
-        top: 10,
-        num_estudiantes: 0
+        periodo: yield select(makeSelectperiodo()),
+        departamento: yield select(makeSelectdepartamento()),
+        municipio: auxMunicipio === '' ? null : auxMunicipio,
+        top: yield select(makeSelecttopNumero()),
+        num_estudiantes: yield select(makeSelectnumeroEstudiantes())
     }
 
     const { response, error } = yield call(obtenerTopColegios, consulta)
@@ -28,5 +27,20 @@ function* TopColegiosSaga() {
     else console.log(error)
 }
 
+function obtenerMunucipios(periodo) {
+    return axios
+        .get(baseUrl + '/datos-generales/departamentos-municipios-cole', { params: { periodo: periodo } })
+        .then(response => ({ response }))
+        .catch(error => ({ error }));
+}
+function* apimunicipiosSaga() {
+    const { response, error } = yield call(obtenerMunucipios, yield select(makeSelectperiodo()))
+    if (response) yield put(obtenerMunicipiosSuccess(response.data))
+    else console.log(error)
+}
 
-export const dashboardSagas = [takeLatest(OBTENER_TOP_COLEGIOS, TopColegiosSaga)]
+
+export const dashboardSagas = [
+    takeLatest(OBTENER_TOP_COLEGIOS, TopColegiosSaga),
+    takeLatest(OBTENER_MUNICIPIOS, apimunicipiosSaga)
+]
