@@ -14,27 +14,15 @@ import {
 import { obtenerData, change } from './actions'
 
 // material
-import { Box, /*Grid, */Container,/* Typography, */Card, Button, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
+import { Box, Container, Card, Button, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 // components
 import Page from '../../components/Page';
 import {
-  /* AppTasks,
-   AppNewUsers,
-   AppBugReports,
-   AppItemOrders,
-   AppNewsUpdate,
-   AppWeeklySales,
-   AppOrderTimeline,
-   AppCurrentVisits,
-   AppWebsiteVisits,
-   AppTrafficBySite,
-   AppCurrentSubject,
-   AppConversionRates,*/
-  AppDiagramaDeCaja
+  AppDesviacion
 } from '../../components/_dashboard/app';
 
 // ----------------------------------------------------------------------
-export function DashboardApp({ 
+export function DashboardApp({
   handleObtenerData,
   handleChange,
   periodo,
@@ -63,14 +51,8 @@ export function DashboardApp({
                   name='periodo'
                   onChange={handleChange}
                 >
-                  <MenuItem value={20211}>20211</MenuItem>
-                  <MenuItem value={20202}>20202</MenuItem>
-                  <MenuItem value={20201}>20201</MenuItem>
-                  <MenuItem value={20192}>20192</MenuItem>
-                  <MenuItem value={20182}>20182</MenuItem>
-                  <MenuItem value={20181}>20181</MenuItem>
-                  <MenuItem value={20172}>20172</MenuItem>
-                  <MenuItem value={20171}>20171</MenuItem>
+                  <MenuItem value={1}>1</MenuItem>
+                  <MenuItem value={2}>2</MenuItem>
                 </Select>
               </FormControl>
               <FormControl sx={{ width: 300, ml: '1rem' }} >
@@ -125,60 +107,9 @@ export function DashboardApp({
               <Button variant="contained" onClick={handleObtenerData} >Consultar</Button>
             </Box>
           </Box>
-              <AppDiagramaDeCaja data={data} />
+          <AppDesviacion data={data} />
         </Card>
-        <>
-          {/*
-        <Box sx={{ pb: 5 }}>
-          <Typography variant="h4">Hi, Welcome back</Typography>
-        </Box>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWeeklySales />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppNewUsers />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppItemOrders />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppBugReports />
-          </Grid>
 
-          <Grid item xs={12} md={6} lg={8}>
-            <AppWebsiteVisits />
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={4}>
-            <AppCurrentVisits />
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={8}>
-            <AppConversionRates />
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={4}>
-            <AppCurrentSubject />
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={8}>
-            <AppNewsUpdate />
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={4}>
-            <AppOrderTimeline />
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={4}>
-            <AppTrafficBySite />
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={8}>
-            <AppTasks />
-          </Grid>
-        </Grid>*/}
-        </>
       </Container>
     </Page>
   );

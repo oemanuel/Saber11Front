@@ -1,6 +1,4 @@
 import { Icon } from '@iconify/react';
-import Cube from '@iconify/icons-eva/cube-fill';
-import BarChart from '@iconify/icons-eva/bar-chart-2-fill';
 /*
 import shoppingBagFill from '@iconify/icons-eva/shopping-bag-fill';
 import fileTextFill from '@iconify/icons-eva/file-text-fill';
@@ -16,12 +14,22 @@ const sidebarConfig = [
   {
     title: 'Ranking de colegios',
     path: '/dashboard/ranking',
-    icon: getIcon(BarChart)
+    icon: getIcon("vaadin:chart-3d")
   },
   {
     title: 'Variables vs puntajes',
     path: '/dashboard/box',
-    icon: getIcon(Cube)
+    icon: getIcon("ic:baseline-candlestick-chart" )
+  },
+  {
+    title: 'Desviación de puntajes',
+    path: '/dashboard/deviation',
+    icon:getIcon("vaadin:spline-area-chart")
+  },
+  {
+    title: 'Promedios de puntajes',
+    path: '/dashboard/average',
+    icon:getIcon("ic:outline-ssid-chart" )
   }/*,
   {
     title: 'product',

@@ -12,3 +12,5 @@ export { default as AppWebsiteVisits } from './AppWebsiteVisits';
 export { default as AppWeeklySales } from './AppWeeklySales';
 export { default as AppDiagramaDeCaja } from './AppDiagramaDeCaja';
 export { default as AppMejoresColegios } from './AppMejoresColegios'
+export { default as AppDesviacion } from './AppDesviacion'
+export { default as AppPromedio } from './AppPromedio'
