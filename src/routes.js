@@ -5,7 +5,12 @@ import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 //
 import Login from './pages/Login';
 import Register from './pages/Register';
+
 import DashboardApp from './pages/DashboardApp';
+import DiagramaDeCaja from './pages/DiagramaDeCaja';
+import Desviacion from './pages/Desviacion';
+import Promedio from './pages/Promedio'
+
 import Products from './pages/Products';
 import Blog from './pages/Blog';
 import User from './pages/User';
@@ -19,8 +24,11 @@ export default function Router() {
       path: '/dashboard',
       element: <DashboardLayout />,
       children: [
-        { path: '/', element: <Navigate to="/dashboard/app" replace /> },
-        { path: 'app', element: <DashboardApp /> },
+        { path: '/', element: <Navigate to="/dashboard/ranking" replace /> },
+        { path: 'ranking', element: <DashboardApp /> },
+        { path: 'box', element: <DiagramaDeCaja /> },
+        { path: 'deviation', element: <Desviacion /> },
+        { path: 'average', element: <Promedio /> },
         { path: 'user', element: <User /> },
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> }

@@ -2,7 +2,6 @@
 import { styled } from '@material-ui/core/styles';
 import { Card, CardHeader } from '@material-ui/core';
 //components
-import Chart2 from '../../Chart2'
 // ----------------------------------------------------------------------
 
 const CHART_HEIGHT = 372;
@@ -32,7 +31,6 @@ export default function AppCurrentVisits() {
     <Card>
       <CardHeader title="Current Visits" />
       <ChartWrapperStyle dir="ltr">
-         <Chart2/>
       </ChartWrapperStyle>
     </Card>
   );
