@@ -48,6 +48,11 @@ const makeSelectnumeroEstudiantes = () =>
         selectDashboardDomain,
         substate => substate.numeroEstudiantes
     )
+const makeSelectPuntaje = () =>
+    createSelector(
+        selectDashboardDomain,
+        substate => substate.puntaje
+    )
 
 
 export {
@@ -59,5 +64,6 @@ export {
     makeSelectdepartamento,
     makeSelectmunicipio,
     makeSelectmunicipiosData,
-    makeSelectnumeroEstudiantes
+    makeSelectnumeroEstudiantes,
+    makeSelectPuntaje
 }
