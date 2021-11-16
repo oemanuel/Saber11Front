@@ -37,7 +37,8 @@ export function DashboardApp({ topColegios,
   municipio,
   handleObtenerMunicipios,
   municipiosData,
-  numeroEstudiantes
+  numeroEstudiantes,
+  puntaje
 }) {
   useEffect(() => {
     if (topColegios === undefined) {
@@ -128,8 +129,28 @@ export function DashboardApp({ topColegios,
 
                 </Select>
               </FormControl>
+
               <Button variant="contained" onClick={handleObtenerTopColegios} >Consultar</Button>
             </Box>
+            <FormControl sx={{ width: 300, mx: "1rem" }}>
+              <InputLabel id="puntaje-select-label">Puntaje</InputLabel>
+              <Select
+                labelId="puntaje-select-label"
+                id="puntaje-select"
+                value={puntaje}
+                label="Puntaje"
+                name="puntaje"
+                onChange={handleChange}
+              >
+                <MenuItem value={'PUNT_LECTURA_CRITICA'}>LECTURA CRITICA</MenuItem>
+                <MenuItem value={'PUNT_MATEMATICAS'}>MATEMATICAS</MenuItem>
+                <MenuItem value={'PUNT_C_NATURALES'}>C. NATURALES</MenuItem>
+                <MenuItem value={'PUNT_SOCIALES_CIUDADANAS'}>SOCIALES & CIUDADANAS</MenuItem>
+                <MenuItem value={'PUNT_INGLES'}>INGLES</MenuItem>
+                <MenuItem value={'PUNT_GLOBAL'}>GLOBAL</MenuItem>
+              </Select>
+            </FormControl>
+
             <FormControl sx={{ width: 100 }} >
               <TextField
                 id="outlined-number"
