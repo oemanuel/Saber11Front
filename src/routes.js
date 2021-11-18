@@ -11,6 +11,7 @@ import Desempenos from './pages/Desempenos'
 import DiagramaDeCaja from './pages/DiagramaDeCaja';
 import Desviacion from './pages/Desviacion';
 import Promedio from './pages/Promedio'
+import Prediccion from './pages/Prediccion'
 
 import Products from './pages/Products';
 import Blog from './pages/Blog';
@@ -31,6 +32,7 @@ export default function Router() {
         { path: 'box', element: <DiagramaDeCaja /> },
         { path: 'deviation', element: <Desviacion /> },
         { path: 'average', element: <Promedio /> },
+        { path: 'prediction', element: <Prediccion /> },
         { path: 'user', element: <User /> },
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> }

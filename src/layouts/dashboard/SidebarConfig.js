@@ -12,6 +12,11 @@ const getIcon = (name) => <Icon icon={name} width={22} height={22} />;
 
 const sidebarConfig = [
   {
+    title: 'Predice tu resultado Saber 11',
+    path: '/dashboard/prediction',
+    icon: getIcon("icomoon-free:profile")
+  },
+  {
     title: 'Ranking de colegios',
     path: '/dashboard/ranking',
     icon: getIcon("vaadin:chart-3d")
@@ -35,32 +40,7 @@ const sidebarConfig = [
     title: 'Promedios de puntajes',
     path: '/dashboard/average',
     icon: getIcon("ic:outline-ssid-chart")
-  }/*,
-  {
-    title: 'product',
-    path: '/dashboard/products',
-    icon: getIcon(shoppingBagFill)
-  },
-  {
-    title: 'blog',
-    path: '/dashboard/blog',
-    icon: getIcon(fileTextFill)
-  },
-  {
-    title: 'login',
-    path: '/login',
-    icon: getIcon(lockFill)
-  },
-  {
-    title: 'register',
-    path: '/register',
-    icon: getIcon(personAddFill)
-  },
-  {
-    title: 'Not found',
-    path: '/404',
-    icon: getIcon(alertTriangleFill)
-  }*/
+  }
 ];
 
 export default sidebarConfig;
