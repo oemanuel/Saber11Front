@@ -1,32 +1,17 @@
 import { createSelector } from 'reselect'
 import { initialState } from './reducer'
 
-const selectDashboardDomain = state => state.dashboardReducer || initialState;
+const selectDashboardDomain = state => state.probabilidadReducer || initialState;
 
-const makeSelectTopColegios = () =>
-    createSelector(
-        selectDashboardDomain,
-        substate => substate.topColegios
-    )
-const makeSelectmejoresColegiosX = () =>
-    createSelector(
-        selectDashboardDomain,
-        substate => substate.mejoresColegiosX
-    )
-const makeSelectmejoresColegiosY = () =>
-    createSelector(
-        selectDashboardDomain,
-        substate => substate.mejoresColegiosY
-    )
 const makeSelectperiodo = () =>
     createSelector(
         selectDashboardDomain,
         substate => substate.periodo
     )
-const makeSelecttopNumero = () =>
+const makeSelectlimitSup = () =>
     createSelector(
         selectDashboardDomain,
-        substate => substate.topNumero
+        substate => substate.limitSup
     )
 const makeSelectdepartamento = () =>
     createSelector(
@@ -43,27 +28,35 @@ const makeSelectmunicipiosData = () =>
         selectDashboardDomain,
         substate => substate.municipiosData
     )
-const makeSelectnumeroEstudiantes = () =>
+const makeSelectlimitInf = () =>
     createSelector(
         selectDashboardDomain,
-        substate => substate.numeroEstudiantes
+        substate => substate.limitInf
     )
 const makeSelectPuntaje = () =>
     createSelector(
         selectDashboardDomain,
         substate => substate.puntaje
     )
-
+const makeSelectProbabilidad = () =>
+    createSelector(
+        selectDashboardDomain,
+        substate => substate.probabilidad
+    )
+const makeSelectpuntajesEstudiantes = () =>
+    createSelector(
+        selectDashboardDomain,
+        substate => substate.puntajesEstudiantesData
+    )
 
 export {
-    makeSelectTopColegios,
-    makeSelectmejoresColegiosX,
-    makeSelectmejoresColegiosY,
     makeSelectperiodo,
-    makeSelecttopNumero,
+    makeSelectlimitSup,
     makeSelectdepartamento,
     makeSelectmunicipio,
     makeSelectmunicipiosData,
-    makeSelectnumeroEstudiantes,
-    makeSelectPuntaje
+    makeSelectlimitInf,
+    makeSelectPuntaje,
+    makeSelectProbabilidad,
+    makeSelectpuntajesEstudiantes
 }

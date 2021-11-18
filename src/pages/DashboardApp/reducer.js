@@ -2,7 +2,7 @@ import produce from 'immer'
 import { OBTENER_TOP_COLEGIOS_SUCCESS, CHANGE, OBTENER_MUNICIPIOS_SUCCESS } from './constants'
 
 export const initialState = {
-    topColegios: undefined,
+    topColegios: [],
     municipiosData: undefined,
     mejoresColegiosX: [],
     mejoresColegiosY: [],
@@ -10,14 +10,15 @@ export const initialState = {
     topNumero: '10',
     numeroEstudiantes: '0',
     departamento: "ATLANTICO",
-    municipio: ""
+    municipio: "",
+    puntaje: 'PUNT_GLOBAL'
 };
 
 const dashboardReducer = (state = initialState, action) =>
     produce(state, draft => {
         switch (action.type) {
             case OBTENER_TOP_COLEGIOS_SUCCESS:
-                draft.topColegios = action.payload
+                draft.topColegios = action.payload.response.mejoresColegios
                 const tempY = []
                 action.payload.response.mejoresColegios.forEach(colegio => tempY.push(colegio.nombre?.trim()))
                 draft.mejoresColegiosY = tempY.reverse()
@@ -36,6 +37,8 @@ const dashboardReducer = (state = initialState, action) =>
                     draft.municipio = action.payload.target.value
                 } else if (action.payload.target.name === 'numeroEstudiantes') {
                     draft.numeroEstudiantes = action.payload.target.value
+                } else if (action.payload.target.name === 'puntaje') {
+                    draft.puntaje = action.payload.target.value
                 }
                 break;
             case OBTENER_MUNICIPIOS_SUCCESS:
