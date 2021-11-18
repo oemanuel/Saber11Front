@@ -6,12 +6,11 @@ import { desviacionSagas } from '../pages/Desviacion/saga'
 import { promedioSagas } from '../pages/Promedio/saga'
 import { desempenoSagas } from '../pages/Desempenos/saga'
 import { prediccionSagas } from '../pages/Prediccion/saga'
+import { probabilidadSagas } from '../pages/Probabilidad/saga'
 import { registrosSagas } from '../pages/Registros/saga'
-import { puntajesEstudiantesSagas } from 'src/pages/PuntajesEstudiantes/saga'
 
-
-const superSagas = [...dashboardSagas, ...diagramaDeCajaSagas, ...desviacionSagas,
-...promedioSagas, ...prediccionSagas, ...desempenoSagas, ...puntajesEstudiantesSagas, ...registrosSagas]
+const superSagas = [...dashboardSagas, ...diagramaDeCajaSagas, ...desviacionSagas, ...probabilidadSagas,
+...promedioSagas, ...prediccionSagas, ...desempenoSagas, ...registrosSagas]
 
 export default function* rootSaga() {
     yield all(

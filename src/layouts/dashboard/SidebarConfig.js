@@ -34,14 +34,14 @@ const sidebarConfig = [
     icon: getIcon("ic:outline-ssid-chart")
   },
   {
+    title: 'Calular probabilidad',
+    path: '/dashboard/probability',
+    icon: getIcon("mdi:file-percent")
+  },
+  {
     title: 'Registros por colegio',
     path: '/dashboard/registers',
     icon: getIcon("si-glyph:file-box")
-  },
-  {
-    title: 'Distribución de puntajes',
-    path: '/dashboard/distribucion',
-    icon: getIcon("ic:outline-ssid-chart")
   }
 ];
 

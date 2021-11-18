@@ -1,14 +1,18 @@
 import { createSelector } from 'reselect'
 import { initialState } from './reducer'
 
-const selectDashboardDomain = state => state.puntajesEstudiantesReducer || initialState;
+const selectDashboardDomain = state => state.probabilidadReducer || initialState;
 
 const makeSelectperiodo = () =>
     createSelector(
         selectDashboardDomain,
         substate => substate.periodo
     )
-
+const makeSelectlimitSup = () =>
+    createSelector(
+        selectDashboardDomain,
+        substate => substate.limitSup
+    )
 const makeSelectdepartamento = () =>
     createSelector(
         selectDashboardDomain,
@@ -24,23 +28,35 @@ const makeSelectmunicipiosData = () =>
         selectDashboardDomain,
         substate => substate.municipiosData
     )
-const makeSelectpuntajesEstudiantes = () =>
+const makeSelectlimitInf = () =>
     createSelector(
         selectDashboardDomain,
-        substate => substate.puntajesEstudiantesData
+        substate => substate.limitInf
     )
 const makeSelectPuntaje = () =>
     createSelector(
         selectDashboardDomain,
         substate => substate.puntaje
     )
-
+const makeSelectProbabilidad = () =>
+    createSelector(
+        selectDashboardDomain,
+        substate => substate.probabilidad
+    )
+const makeSelectpuntajesEstudiantes = () =>
+    createSelector(
+        selectDashboardDomain,
+        substate => substate.puntajesEstudiantesData
+    )
 
 export {
     makeSelectperiodo,
+    makeSelectlimitSup,
     makeSelectdepartamento,
     makeSelectmunicipio,
     makeSelectmunicipiosData,
-    makeSelectpuntajesEstudiantes,
-    makeSelectPuntaje
+    makeSelectlimitInf,
+    makeSelectPuntaje,
+    makeSelectProbabilidad,
+    makeSelectpuntajesEstudiantes
 }

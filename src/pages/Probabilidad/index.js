@@ -6,36 +6,48 @@ import { compose } from 'redux';
 
 import {
   makeSelectperiodo,
+  makeSelectlimitSup,
   makeSelectdepartamento,
   makeSelectmunicipio,
   makeSelectmunicipiosData,
+  makeSelectlimitInf,
+  makeSelectPuntaje,
+  makeSelectProbabilidad,
   makeSelectpuntajesEstudiantes
 }
   from './selectors'
-import { obtenerPuntajesEstudiantes, change, obtenerMunicipios } from './actions'
+import { obtenerPuntajesEstudiantes, obtenerProbabilidad, change, obtenerMunicipios } from './actions'
 
 // material
-import { Box, Container, Card, Button, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
+import { Box, Container, Card, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@material-ui/core';
 // components
 import Page from '../../components/Page';
 import { GraphPuntajesEstudiantes } from '../../components/_dashboard/app';
-
 // ----------------------------------------------------------------------
 
-export function AppPuntajesEstudiantes({
-  handleObtenerPuntajesEstudiantes,
+export function Probabilidad({
+  handleObtenerProbabilidad,
   handleChange,
   periodo,
   departamento,
   municipio,
   handleObtenerMunicipios,
   municipiosData,
-  puntajesEstudiantesData,
-  puntaje
+  puntaje,
+  limitSup,
+  limitInf,
+  probabilidad,
+  handleObtenerPuntajesEstudiantes,
+  puntajesEstudiantesData
 }) {
   useEffect(() => {
     if (puntajesEstudiantesData === undefined) {
       handleObtenerPuntajesEstudiantes()
+    }
+  })
+  useEffect(() => {
+    if (probabilidad === undefined) {
+      handleObtenerProbabilidad()
     }
   })
   useEffect(() => {
@@ -52,7 +64,7 @@ export function AppPuntajesEstudiantes({
     <Page title="Tu Saber 11°">
       <Container maxWidth="xl">
         <Card>
-          <Box sx={{ padding: '2rem', paddingBottom: '0' }}>
+          <Box sx={{ padding: '2rem' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '2rem' }}>
               <FormControl sx={{ width: 100 }}>
                 <InputLabel id="demo-simple-select-label">Perdiodo</InputLabel>
@@ -74,6 +86,7 @@ export function AppPuntajesEstudiantes({
                   <MenuItem value={20171}>20171</MenuItem>
                 </Select>
               </FormControl>
+
               <FormControl sx={{ width: 300 }} >
                 <InputLabel id="departamentos-select-label">Departamento</InputLabel>
                 <Select
@@ -84,12 +97,12 @@ export function AppPuntajesEstudiantes({
                   name="departamento"
                   onChange={handleChange}
                 >
+                  <MenuItem value={''}>Ninguno</MenuItem>
                   {municipiosData !== undefined && (
                     municipiosData.map((item, index) =>
                       <MenuItem key={index} value={item.departamento}>{item.departamento}</MenuItem>)
                   )
                   }
-
                 </Select>
               </FormControl>
               <FormControl sx={{ width: 300 }}>
@@ -109,10 +122,9 @@ export function AppPuntajesEstudiantes({
 
                 </Select>
               </FormControl>
-
-              <Button variant="contained" onClick={handleObtenerPuntajesEstudiantes} >Consultar</Button>
+              <Button variant="contained" onClick={() => { handleObtenerProbabilidad(); handleObtenerPuntajesEstudiantes() }} >Consultar</Button>
             </Box>
-            <FormControl sx={{ width: 300, mx: "1rem" }}>
+            <FormControl sx={{ width: 300, mr: "1rem" }}>
               <InputLabel id="puntaje-select-label">Puntaje</InputLabel>
               <Select
                 labelId="puntaje-select-label"
@@ -130,43 +142,84 @@ export function AppPuntajesEstudiantes({
                 <MenuItem value={'PUNT_GLOBAL'}>GLOBAL</MenuItem>
               </Select>
             </FormControl>
-
-            <GraphPuntajesEstudiantes data={puntajesEstudiantesData} />
-
+            <FormControl sx={{ width: 150, mr: "1rem" }} >
+              <TextField
+                id="outlined-number"
+                label="Limite Inferior"
+                name="limit-inf"
+                type="number"
+                value={limitInf}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={handleChange}
+              />
+            </FormControl>
+            <FormControl sx={{ width: 150 }} >
+              <TextField
+                id="outlined-number"
+                label="Limite Superior"
+                name="limit-sup"
+                type="number"
+                value={limitSup}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={handleChange}
+              />
+            </FormControl>
+            <Box sx={{ mt: 2 }} />
+            {
+              probabilidad?.respuesta && (
+                <Typography variant='h6'>
+                  ⚠️{probabilidad.respuesta}⚠️
+                </Typography>
+              )
+            }
           </Box>
-
+          <GraphPuntajesEstudiantes data={puntajesEstudiantesData} />
         </Card>
       </Container>
     </Page>
   );
 }
 
-AppPuntajesEstudiantes.propTypes = {
+Probabilidad.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  handleObtenerPuntajesEstudiantes: PropTypes.func,
+  handleObtenerProbabilidad: PropTypes.func,
   periodo: PropTypes.number,
   departamento: PropTypes.string,
   municipio: PropTypes.string,
   handleChange: PropTypes.func,
   municipiosData: PropTypes.array,
   handleObtenerMunicipios: PropTypes.func,
+  limitInf: PropTypes.string,
+  limitSup: PropTypes.string,
+  puntaje: PropTypes.string,
+  probabilidad: PropTypes.object,
+  handleObtenerPuntajesEstudiantes: PropTypes.func,
   puntajesEstudiantesData: PropTypes.object
 }
 
 const mapStateToProps = createStructuredSelector({
   periodo: makeSelectperiodo(),
+  limitInf: makeSelectlimitInf(),
   departamento: makeSelectdepartamento(),
   municipio: makeSelectmunicipio(),
   municipiosData: makeSelectmunicipiosData(),
+  limitSup: makeSelectlimitSup(),
+  puntaje: makeSelectPuntaje(),
+  probabilidad: makeSelectProbabilidad(),
   puntajesEstudiantesData: makeSelectpuntajesEstudiantes()
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    handleObtenerPuntajesEstudiantes: () => dispatch(obtenerPuntajesEstudiantes()),
+    handleObtenerProbabilidad: () => dispatch(obtenerProbabilidad()),
     handleObtenerMunicipios: () => dispatch(obtenerMunicipios()),
-    handleChange: (event) => dispatch(change(event.target))
+    handleChange: (event) => dispatch(change(event.target)),
+    handleObtenerPuntajesEstudiantes: () => dispatch(obtenerPuntajesEstudiantes()),
   }
 }
 
@@ -175,4 +228,4 @@ const withConnect = connect(
   mapDispatchToProps
 )
 
-export default compose(withConnect)(AppPuntajesEstudiantes);
+export default compose(withConnect)(Probabilidad);
