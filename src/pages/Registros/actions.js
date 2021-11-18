@@ -1,4 +1,4 @@
-import { OBTENER_COLEGIOS, OBTENER_COLEGIOS_SUCCESS, CHANGE, OBTENER_MUNICIPIOS, OBTENER_MUNICIPIOS_SUCCESS, OBTENER_REGISTROS, OBTENER_REGISTROS_SUCCESS } from './constants'
+import { OBTENER_COLEGIOS, CHANGE_PAGE, OBTENER_COLEGIOS_SUCCESS, CHANGE, OBTENER_MUNICIPIOS, OBTENER_MUNICIPIOS_SUCCESS, OBTENER_REGISTROS, OBTENER_REGISTROS_SUCCESS } from './constants'
 
 export function obtenerColegios() {
     return {
@@ -37,5 +37,10 @@ export function change(target) {
     return {
         type: CHANGE,
         payload: { target }
+    }
+}
+export function changePage() {
+    return {
+        type: CHANGE_PAGE,
     }
 }

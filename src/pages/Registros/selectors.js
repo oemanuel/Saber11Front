@@ -41,6 +41,11 @@ const makeSelectRegistros = () =>
         selectDashboardDomain,
         substate => substate.registros
     )
+const makeSelectInicio = () =>
+    createSelector(
+        selectDashboardDomain,
+        substate => substate.inicio
+    )
 
 
 export {
@@ -50,5 +55,6 @@ export {
     makeSelectmunicipiosData,
     makeSelectColegio,
     makeSelectListaColegios,
-    makeSelectRegistros
+    makeSelectRegistros,
+    makeSelectInicio
 }

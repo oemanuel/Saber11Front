@@ -11,14 +11,15 @@ import {
   makeSelectmunicipiosData,
   makeSelectListaColegios,
   makeSelectColegio,
-  makeSelectRegistros
+  makeSelectRegistros,
+  makeSelectInicio
 }
   from './selectors'
-import { obtenerColegios, change, obtenerMunicipios, obtenerRegistros } from './actions'
+import { obtenerColegios, change, obtenerMunicipios, obtenerRegistros, changePage } from './actions'
 
 // material
 import { Box, Container, Card, Button, FormControl, InputLabel, MenuItem, Select, Autocomplete, TextField } from '@material-ui/core';
-import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 // components
 import Page from '../../components/Page';
 
@@ -35,7 +36,9 @@ export function DashboardApp({
   listaColegios,
   colegio,
   handleObtenerRegistros,
-  registros
+  registros,
+  inicio,
+  handleChangePage
 }) {
 
   useEffect(() => {
@@ -52,28 +55,72 @@ export function DashboardApp({
     arrayForSort = [...municipiosss]
     arrayForSort = arrayForSort.sort()
   }
-  const rows = [
+  let rows = [
     ...registros.map((registro, index) => {
       return {
         ...registro,
         id: index
       }
-    })
+    }),
   ];
-  console.log(rows)
-
+  if (registros.length !== 0) {
+    rows.push({
+      id: inicio + 999,
+      "COLE_AREA_UBICACION": "",
+      "COLE_BILINGUE": "",
+      "COLE_CALENDARIO": "",
+      "COLE_CARACTER": "",
+      "COLE_JORNADA": "",
+      "COLE_NATURALEZA": "",
+      "DESEMP_C_NATURALES": "",
+      "DESEMP_INGLES": "",
+      "DESEMP_LECTURA_CRITICA": "",
+      "DESEMP_MATEMATICAS": "",
+      "DESEMP_SOCIALES_CIUDADANAS": "",
+      "ESTU_DEDICACIONINTERNET": "",
+      "ESTU_DEDICACIONLECTURADIARIA": "",
+      "ESTU_DEPTO_RESIDE": "",
+      "ESTU_EDAD": "",
+      "ESTU_GENERACION-E": "",
+      "ESTU_GENERO": "",
+      "ESTU_HORASSEMANATRABAJA": "",
+      "ESTU_MCPIO_RESIDE": "",
+      "ESTU_TIENEETNIA": "",
+      "FAMI_COMECARNEPESCADOHUEVO": "",
+      "FAMI_CUARTOSHOGAR": "",
+      "FAMI_EDUCACIONMADRE": "",
+      "FAMI_EDUCACIONPADRE": "",
+      "FAMI_ESTRATOVIVIENDA": "",
+      "FAMI_NUMLIBROS": "",
+      "FAMI_PERSONASHOGAR": "",
+      "FAMI_SITUACIONECONOMICA": "",
+      "FAMI_TIENEAUTOMOVIL": "",
+      "FAMI_TIENECOMPUTADOR": "",
+      "FAMI_TIENECONSOLAVIDEOJUEGOS": "",
+      "FAMI_TIENEINTERNET": "",
+      "FAMI_TIENESERVICIOTV": "",
+      "PERCENTIL_GLOBAL": "",
+      "PUNT_C_NATURALES": "",
+      "PUNT_GLOBAL": "",
+      "PUNT_INGLES": "",
+      "PUNT_LECTURA_CRITICA": "",
+      "PUNT_MATEMATICAS": "",
+      "PUNT_SOCIALES_CIUDADANAS": ''
+    })
+  }
   const columns = [
-    { field: 'COLE_AREA_UBICACION', headerName: 'COLE_AREA_UBICACION', width: 200 },
-    { field: 'COLE_BILINGUE', headerName: 'COLE_BILINGUE', width: 150 },
-    { field: 'COLE_CALENDARIO', headerName: 'COLE_CALENDARIO', width: 200 },
-    { field: 'COLE_CARACTER', headerName: 'COLE_CARACTER', width: 250 },
-    { field: 'COLE_JORNADA', headerName: 'COLE_JORNADA', width: 150 },
-    { field: 'COLE_NATURALEZA', headerName: 'COLE_NATURALEZA', width: 200 },
+    { field: 'PUNT_C_NATURALES', headerName: 'PUNT_C_NATURALES', width: 280 },
+    { field: 'PUNT_GLOBAL', headerName: 'PUNT_GLOBAL', width: 280 },
+    { field: 'PUNT_INGLES', headerName: 'PUNT_INGLES', width: 280 },
+    { field: 'PUNT_LECTURA_CRITICA', headerName: 'PUNT_LECTURA_CRITICA', width: 280 },
+    { field: 'PUNT_MATEMATICAS', headerName: 'PUNT_MATEMATICAS', width: 280 },
+    { field: 'PUNT_SOCIALES_CIUDADANAS', headerName: 'PUNT_SOCIALES_CIUDADANAS', width: 280 },
     { field: 'DESEMP_C_NATURALES', headerName: 'DESEMP_C_NATURALES', width: 200 },
     { field: 'DESEMP_INGLES', headerName: 'DESEMP_INGLES', width: 150 },
     { field: 'DESEMP_LECTURA_CRITICA', headerName: 'DESEMP_LECTURA_CRITICA', width: 250 },
     { field: 'DESEMP_MATEMATICAS', headerName: 'DESEMP_MATEMATICAS', width: 200 },
     { field: 'DESEMP_SOCIALES_CIUDADANAS', headerName: 'DESEMP_SOCIALES_CIUDADANAS', width: 250 },
+    { field: 'PERCENTIL_GLOBAL', headerName: 'PERCENTIL_GLOBAL', width: 280 },
     { field: 'ESTU_DEDICACIONINTERNET', headerName: 'ESTU_DEDICACIONINTERNET', width: 250 },
     { field: 'ESTU_DEDICACIONLECTURADIARIA', headerName: 'ESTU_DEDICACIONLECTURADIARIA', width: 280 },
     { field: 'ESTU_DEPTO_RESIDE', headerName: 'ESTU_DEPTO_RESIDE', width: 200 },
@@ -83,6 +130,12 @@ export function DashboardApp({
     { field: 'ESTU_HORASSEMANATRABAJA', headerName: 'ESTU_HORASSEMANATRABAJA', width: 200 },
     { field: 'ESTU_MCPIO_RESIDE', headerName: 'ESTU_MCPIO_RESIDE', width: 200 },
     { field: 'ESTU_TIENEETNIA', headerName: 'ESTU_TIENEETNIA', width: 200 },
+    { field: 'COLE_NATURALEZA', headerName: 'COLE_NATURALEZA', width: 200 },
+    { field: 'COLE_AREA_UBICACION', headerName: 'COLE_AREA_UBICACION', width: 200 },
+    { field: 'COLE_BILINGUE', headerName: 'COLE_BILINGUE', width: 150 },
+    { field: 'COLE_CALENDARIO', headerName: 'COLE_CALENDARIO', width: 200 },
+    { field: 'COLE_CARACTER', headerName: 'COLE_CARACTER', width: 250 },
+    { field: 'COLE_JORNADA', headerName: 'COLE_JORNADA', width: 150 },
     { field: 'FAMI_COMECARNEPESCADOHUEVO', headerName: 'FAMI_COMECARNEPESCADOHUEVO', width: 280 },
     { field: 'FAMI_CUARTOSHOGAR', headerName: 'FAMI_CUARTOSHOGAR', width: 280 },
     { field: 'FAMI_EDUCACIONMADRE', headerName: 'FAMI_EDUCACIONMADRE', width: 280 },
@@ -96,14 +149,6 @@ export function DashboardApp({
     { field: 'FAMI_TIENECONSOLAVIDEOJUEGOS', headerName: 'FAMI_TIENECONSOLAVIDEOJUEGOS', width: 280 },
     { field: 'FAMI_TIENEINTERNET', headerName: 'FAMI_TIENEINTERNET', width: 280 },
     { field: 'FAMI_TIENESERVICIOTV', headerName: 'FAMI_TIENESERVICIOTV', width: 280 },
-    { field: 'PERCENTIL_GLOBAL', headerName: 'PERCENTIL_GLOBAL', width: 280 },
-    { field: 'PUNT_C_NATURALES', headerName: 'PUNT_C_NATURALES', width: 280 },
-    { field: 'PUNT_GLOBAL', headerName: 'PUNT_GLOBAL', width: 280 },
-    { field: 'PUNT_INGLES', headerName: 'PUNT_INGLES', width: 280 },
-    { field: 'PUNT_LECTURA_CRITICA', headerName: 'PUNT_LECTURA_CRITICA', width: 280 },
-    { field: 'PUNT_MATEMATICAS', headerName: 'PUNT_MATEMATICAS', width: 280 },
-    { field: 'PUNT_SOCIALES_CIUDADANAS', headerName: 'PUNT_SOCIALES_CIUDADANAS', width: 280 },
-
   ];
 
   return (
@@ -172,7 +217,7 @@ export function DashboardApp({
             <FormControl sx={{ width: 300 }}>
               <Autocomplete
                 disablePortal
-                id="combo-box-demo"
+                id="combo-box"
                 options={listaColegios}
                 value={colegio}
                 name="colegios"
@@ -183,12 +228,13 @@ export function DashboardApp({
               />
             </FormControl>
             <Box sx={{ my: 5 }} />
-            <div style={{ height: rows.length === 0 ? 200 : 60 * (rows.length + 1), width: '100%' }}>
+            <div style={{ height: rows.length === 0 ? 200 : 600, width: '100%' }}>
               <DataGrid
                 rows={rows}
                 columns={columns}
                 pageSize={20}
                 rowsPerPageOptions={[20]}
+                onPageChange={(newPage) => handleChangePage()}
               />
             </div>
           </Box>
@@ -216,7 +262,9 @@ DashboardApp.propTypes = {
   numeroEstudiantes: PropTypes.string,
   listaColegios: PropTypes.array,
   registros: PropTypes.array,
-  colegio: PropTypes.string
+  colegio: PropTypes.string,
+  inicio: PropTypes.number,
+  handleChangePage: PropTypes.func
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -226,7 +274,8 @@ const mapStateToProps = createStructuredSelector({
   municipiosData: makeSelectmunicipiosData(),
   listaColegios: makeSelectListaColegios(),
   colegio: makeSelectColegio(),
-  registros: makeSelectRegistros()
+  registros: makeSelectRegistros(),
+  inicio: makeSelectInicio()
 });
 
 function mapDispatchToProps(dispatch) {
@@ -235,7 +284,8 @@ function mapDispatchToProps(dispatch) {
     handleObtenerColegios: () => dispatch(obtenerColegios()),
     handleObtenerMunicipios: () => dispatch(obtenerMunicipios()),
     handleObtenerRegistros: () => dispatch(obtenerRegistros()),
-    handleChange: (event) => dispatch(change(event.target))
+    handleChange: (event) => dispatch(change(event.target)),
+    handleChangePage: () => dispatch(changePage())
   }
 }
 
