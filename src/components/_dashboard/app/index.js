@@ -14,3 +14,5 @@ export { default as AppDiagramaDeCaja } from './AppDiagramaDeCaja';
 export { default as AppMejoresColegios } from './AppMejoresColegios'
 export { default as AppDesviacion } from './AppDesviacion'
 export { default as AppPromedio } from './AppPromedio'
+export { default as AppDesempenos } from './AppDesempenos'
+export { default as GraphPuntajesEstudiantes } from './AppPuntajesEstudiantes'
