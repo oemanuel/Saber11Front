@@ -12,16 +12,17 @@ import {
   makeSelectmunicipiosData,
   makeSelectlimitInf,
   makeSelectPuntaje,
-  makeSelectProbabilidad
+  makeSelectProbabilidad,
+  makeSelectpuntajesEstudiantes
 }
   from './selectors'
-import { obtenerProbabilidad, change, obtenerMunicipios } from './actions'
+import { obtenerPuntajesEstudiantes, obtenerProbabilidad, change, obtenerMunicipios } from './actions'
 
 // material
 import { Box, Container, Card, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@material-ui/core';
 // components
 import Page from '../../components/Page';
-
+import { GraphPuntajesEstudiantes } from '../../components/_dashboard/app';
 // ----------------------------------------------------------------------
 
 export function Probabilidad({
@@ -35,8 +36,20 @@ export function Probabilidad({
   puntaje,
   limitSup,
   limitInf,
-  probabilidad
+  probabilidad,
+  handleObtenerPuntajesEstudiantes,
+  puntajesEstudiantesData
 }) {
+  useEffect(() => {
+    if (puntajesEstudiantesData === undefined) {
+      handleObtenerPuntajesEstudiantes()
+    }
+  })
+  useEffect(() => {
+    if (probabilidad === undefined) {
+      handleObtenerProbabilidad()
+    }
+  })
   useEffect(() => {
     handleObtenerMunicipios()
   }, [periodo, handleObtenerMunicipios])
@@ -84,12 +97,12 @@ export function Probabilidad({
                   name="departamento"
                   onChange={handleChange}
                 >
+                  <MenuItem value={''}>Ninguno</MenuItem>
                   {municipiosData !== undefined && (
                     municipiosData.map((item, index) =>
                       <MenuItem key={index} value={item.departamento}>{item.departamento}</MenuItem>)
                   )
                   }
-
                 </Select>
               </FormControl>
               <FormControl sx={{ width: 300 }}>
@@ -109,8 +122,7 @@ export function Probabilidad({
 
                 </Select>
               </FormControl>
-
-              <Button variant="contained" onClick={handleObtenerProbabilidad} >Consultar</Button>
+              <Button variant="contained" onClick={() => { handleObtenerProbabilidad(); handleObtenerPuntajesEstudiantes() }} >Consultar</Button>
             </Box>
             <FormControl sx={{ width: 300, mr: "1rem" }}>
               <InputLabel id="puntaje-select-label">Puntaje</InputLabel>
@@ -156,7 +168,7 @@ export function Probabilidad({
                 onChange={handleChange}
               />
             </FormControl>
-            <Box sx={{mt:2}}/>
+            <Box sx={{ mt: 2 }} />
             {
               probabilidad?.respuesta && (
                 <Typography variant='h6'>
@@ -165,7 +177,7 @@ export function Probabilidad({
               )
             }
           </Box>
-
+          <GraphPuntajesEstudiantes data={puntajesEstudiantesData} />
         </Card>
       </Container>
     </Page>
@@ -184,7 +196,9 @@ Probabilidad.propTypes = {
   limitInf: PropTypes.string,
   limitSup: PropTypes.string,
   puntaje: PropTypes.string,
-  probabilidad: PropTypes.object
+  probabilidad: PropTypes.object,
+  handleObtenerPuntajesEstudiantes: PropTypes.func,
+  puntajesEstudiantesData: PropTypes.object
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -195,7 +209,8 @@ const mapStateToProps = createStructuredSelector({
   municipiosData: makeSelectmunicipiosData(),
   limitSup: makeSelectlimitSup(),
   puntaje: makeSelectPuntaje(),
-  probabilidad: makeSelectProbabilidad()
+  probabilidad: makeSelectProbabilidad(),
+  puntajesEstudiantesData: makeSelectpuntajesEstudiantes()
 });
 
 function mapDispatchToProps(dispatch) {
@@ -203,7 +218,8 @@ function mapDispatchToProps(dispatch) {
     dispatch,
     handleObtenerProbabilidad: () => dispatch(obtenerProbabilidad()),
     handleObtenerMunicipios: () => dispatch(obtenerMunicipios()),
-    handleChange: (event) => dispatch(change(event.target))
+    handleChange: (event) => dispatch(change(event.target)),
+    handleObtenerPuntajesEstudiantes: () => dispatch(obtenerPuntajesEstudiantes()),
   }
 }
 

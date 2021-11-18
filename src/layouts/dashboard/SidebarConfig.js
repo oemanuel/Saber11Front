@@ -42,11 +42,6 @@ const sidebarConfig = [
     title: 'Registros por colegio',
     path: '/dashboard/registers',
     icon: getIcon("si-glyph:file-box")
-  },
-  {
-    title: 'Distribución de puntajes',
-    path: '/dashboard/distribucion',
-    icon: getIcon("ic:outline-ssid-chart")
   }
 ];
 

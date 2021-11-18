@@ -1,7 +1,8 @@
 import produce from 'immer'
-import { OBTENER_PROBABILIDAD_SUCCESS, CHANGE, OBTENER_MUNICIPIOS_SUCCESS } from './constants'
+import { OBTENER_PROBABILIDAD_SUCCESS, OBTENER_PUNTAJES_ESTUDIANTES_SUCCESS, CHANGE, OBTENER_MUNICIPIOS_SUCCESS } from './constants'
 
 export const initialState = {
+    puntajesEstudiantesData: undefined,
     municipiosData: undefined,
     periodo: 20202,
     limitSup: '400',
@@ -15,6 +16,9 @@ export const initialState = {
 const probabilidadReducer = (state = initialState, action) =>
     produce(state, draft => {
         switch (action.type) {
+            case OBTENER_PUNTAJES_ESTUDIANTES_SUCCESS:
+                draft.puntajesEstudiantesData = action.payload.response.puntaje_estudiantes
+                break;
             case OBTENER_PROBABILIDAD_SUCCESS:
                 draft.probabilidad = action.payload.response
                 break;

@@ -43,6 +43,11 @@ const makeSelectProbabilidad = () =>
         selectDashboardDomain,
         substate => substate.probabilidad
     )
+const makeSelectpuntajesEstudiantes = () =>
+    createSelector(
+        selectDashboardDomain,
+        substate => substate.puntajesEstudiantesData
+    )
 
 export {
     makeSelectperiodo,
@@ -52,5 +57,6 @@ export {
     makeSelectmunicipiosData,
     makeSelectlimitInf,
     makeSelectPuntaje,
-    makeSelectProbabilidad
+    makeSelectProbabilidad,
+    makeSelectpuntajesEstudiantes
 }
