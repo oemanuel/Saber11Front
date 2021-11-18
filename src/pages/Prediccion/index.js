@@ -410,7 +410,7 @@ export function Prediccion({ handleChange, handlePredecir, state }) {
                   >
                     <MenuItem value={''}>Seleccionar</MenuItem>
                     <MenuItem value={'0 A 10 LIBROS'}>0 A 10 LIBROS</MenuItem>
-                    <MenuItem value={'11 A 25 LIBROS26 A 100 LIBROS'}>11 A 25 LIBROS26 A 100 LIBROS</MenuItem>
+                    <MenuItem value={'11 A 25 LIBROS'}>11 A 25 LIBROS</MenuItem>
                     <MenuItem value={'26 A 100 LIBROS'}>26 A 100 LIBROS</MenuItem>
                     <MenuItem value={'MÁS DE 100 LIBROS'}>MÁS DE 100 LIBROS</MenuItem>
                   </Select>
