@@ -35,6 +35,11 @@ const sidebarConfig = [
     title: 'Promedios de puntajes',
     path: '/dashboard/average',
     icon: getIcon("ic:outline-ssid-chart")
+  },
+  {
+    title: 'Registros por colegio',
+    path: '/dashboard/registers',
+    icon: getIcon("si-glyph:file-box")
   }
 ];
 

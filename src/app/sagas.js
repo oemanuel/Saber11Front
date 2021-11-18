@@ -5,8 +5,9 @@ import { diagramaDeCajaSagas } from '../pages/DiagramaDeCaja/saga'
 import { desviacionSagas } from '../pages/Desviacion/saga'
 import { promedioSagas } from '../pages/Promedio/saga'
 import { prediccionSagas } from '../pages/Prediccion/saga'
+import {registrosSagas} from '../pages/Registros/saga'
 
-const superSagas = [...dashboardSagas, ...diagramaDeCajaSagas, ...desviacionSagas, ...promedioSagas, ...prediccionSagas]
+const superSagas = [...dashboardSagas, ...diagramaDeCajaSagas, ...desviacionSagas, ...promedioSagas, ...prediccionSagas, ...registrosSagas]
 export default function* rootSaga() {
     yield all(
         superSagas.map(saga =>
