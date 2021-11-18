@@ -42,7 +42,7 @@ export function DashboardApp({ topColegios,
   puntaje
 }) {
   useEffect(() => {
-    if (topColegios === []) {
+    if (topColegios.length === 0) {
       handleObtenerTopColegios()
     }
   })
@@ -128,6 +128,7 @@ export function DashboardApp({ topColegios,
                   name="departamento"
                   onChange={handleChange}
                 >
+                  <MenuItem value={''}>Ninguno</MenuItem>
                   {municipiosData !== undefined && (
                     municipiosData.map((item, index) =>
                       <MenuItem key={index} value={item.departamento}>{item.departamento}</MenuItem>)
@@ -156,7 +157,7 @@ export function DashboardApp({ topColegios,
 
               <Button variant="contained" onClick={handleObtenerTopColegios} >Consultar</Button>
             </Box>
-            <FormControl sx={{ width: 300, mx: "1rem" }}>
+            <FormControl sx={{ width: 300, mr: "1rem" }}>
               <InputLabel id="puntaje-select-label">Puntaje</InputLabel>
               <Select
                 labelId="puntaje-select-label"
@@ -205,7 +206,7 @@ export function DashboardApp({ topColegios,
 
 DashboardApp.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  topColegios: PropTypes.object,
+  topColegios: PropTypes.array,
   handleObtenerTopColegios: PropTypes.func,
   mejoresColegiosX: PropTypes.array,
   mejoresColegiosY: PropTypes.array,

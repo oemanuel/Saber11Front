@@ -70,7 +70,7 @@ export function DesempenoApp({
         <Card>
           <Box sx={{ padding: '2rem', paddingBottom: '0' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '2rem' }}>
-              <FormControl sx={{ width: 300 }} >
+              <FormControl sx={{ width: 100 }} >
                 <InputLabel id="calendario-select-label-desempenos">Calendario</InputLabel>
                 <Select
                   labelId="calendario-select-label-desempenos"
@@ -105,12 +105,7 @@ export function DesempenoApp({
 
                 </Select>
               </FormControl>
-
-
-              <Button variant="contained" onClick={handleObtenerDesempenos} >Consultar</Button>
-            </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'rigth', paddingBottom: '2rem' }}>
-              <FormControl sx={{ width: 300, marginRight: '200px' }}>
+              <FormControl sx={{ width: 300}}>
                 <InputLabel id="municipios-select-label-desempenos">Municipio</InputLabel>
                 <Select
                   labelId="municipios-select-label-desempenos"
@@ -127,6 +122,11 @@ export function DesempenoApp({
 
                 </Select>
               </FormControl>
+
+              <Button variant="contained" onClick={handleObtenerDesempenos} >Consultar</Button>
+            </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'rigth', paddingBottom: '2rem' }}>
+
 
               <FormControl sx={{ width: 300 }}>
                 <Autocomplete
