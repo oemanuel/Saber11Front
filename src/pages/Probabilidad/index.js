@@ -5,46 +5,38 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import {
-  makeSelectTopColegios,
-  makeSelectmejoresColegiosX,
-  makeSelectmejoresColegiosY,
   makeSelectperiodo,
-  makeSelecttopNumero,
+  makeSelectlimitSup,
   makeSelectdepartamento,
   makeSelectmunicipio,
   makeSelectmunicipiosData,
-  makeSelectnumeroEstudiantes
+  makeSelectlimitInf,
+  makeSelectPuntaje,
+  makeSelectProbabilidad
 }
   from './selectors'
-import { obtenerTopColegios, change, obtenerMunicipios } from './actions'
+import { obtenerProbabilidad, change, obtenerMunicipios } from './actions'
 
 // material
-import { Box, Container, Card, Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
+import { Box, Container, Card, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@material-ui/core';
 // components
 import Page from '../../components/Page';
-import { AppMejoresColegios } from '../../components/_dashboard/app';
 
 // ----------------------------------------------------------------------
 
-export function DashboardApp({ topColegios,
-  handleObtenerTopColegios,
-  mejoresColegiosX,
-  mejoresColegiosY,
+export function Probabilidad({
+  handleObtenerProbabilidad,
   handleChange,
   periodo,
-  topNumero,
   departamento,
   municipio,
   handleObtenerMunicipios,
   municipiosData,
-  numeroEstudiantes,
-  puntaje
+  puntaje,
+  limitSup,
+  limitInf,
+  probabilidad
 }) {
-  useEffect(() => {
-    if (topColegios === undefined) {
-      handleObtenerTopColegios()
-    }
-  })
   useEffect(() => {
     handleObtenerMunicipios()
   }, [periodo, handleObtenerMunicipios])
@@ -59,7 +51,7 @@ export function DashboardApp({ topColegios,
     <Page title="Tu Saber 11°">
       <Container maxWidth="xl">
         <Card>
-          <Box sx={{ padding: '2rem', paddingBottom: '0' }}>
+          <Box sx={{ padding: '2rem' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '2rem' }}>
               <FormControl sx={{ width: 100 }}>
                 <InputLabel id="demo-simple-select-label">Perdiodo</InputLabel>
@@ -81,19 +73,7 @@ export function DashboardApp({ topColegios,
                   <MenuItem value={20171}>20171</MenuItem>
                 </Select>
               </FormControl>
-              <FormControl sx={{ width: 100 }} >
-                <TextField
-                  id="outlined-number"
-                  label="Top número"
-                  name="topNumero"
-                  type="number"
-                  value={topNumero}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  onChange={handleChange}
-                />
-              </FormControl>
+
               <FormControl sx={{ width: 300 }} >
                 <InputLabel id="departamentos-select-label">Departamento</InputLabel>
                 <Select
@@ -130,7 +110,7 @@ export function DashboardApp({ topColegios,
                 </Select>
               </FormControl>
 
-              <Button variant="contained" onClick={handleObtenerTopColegios} >Consultar</Button>
+              <Button variant="contained" onClick={handleObtenerProbabilidad} >Consultar</Button>
             </Box>
             <FormControl sx={{ width: 300, mr: "1rem" }}>
               <InputLabel id="puntaje-select-label">Puntaje</InputLabel>
@@ -150,60 +130,78 @@ export function DashboardApp({ topColegios,
                 <MenuItem value={'PUNT_GLOBAL'}>GLOBAL</MenuItem>
               </Select>
             </FormControl>
-
-            <FormControl sx={{ width: 100 }} >
+            <FormControl sx={{ width: 150, mr: "1rem" }} >
               <TextField
                 id="outlined-number"
-                label="Estudiantes"
-                name="numeroEstudiantes"
+                label="Limite Inferior"
+                name="limit-inf"
                 type="number"
-                value={numeroEstudiantes}
+                value={limitInf}
                 InputLabelProps={{
                   shrink: true,
                 }}
                 onChange={handleChange}
               />
             </FormControl>
+            <FormControl sx={{ width: 150 }} >
+              <TextField
+                id="outlined-number"
+                label="Limite Superior"
+                name="limit-sup"
+                type="number"
+                value={limitSup}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={handleChange}
+              />
+            </FormControl>
+            <Box sx={{mt:2}}/>
+            {
+              probabilidad?.respuesta && (
+                <Typography variant='h6'>
+                  ⚠️{probabilidad.respuesta}⚠️
+                </Typography>
+              )
+            }
           </Box>
-          <AppMejoresColegios x={mejoresColegiosX} y={mejoresColegiosY} />
+
         </Card>
       </Container>
     </Page>
   );
 }
 
-DashboardApp.propTypes = {
+Probabilidad.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  topColegios: PropTypes.object,
-  handleObtenerTopColegios: PropTypes.func,
-  mejoresColegiosX: PropTypes.array,
-  mejoresColegiosY: PropTypes.array,
+  handleObtenerProbabilidad: PropTypes.func,
   periodo: PropTypes.number,
-  topNumero: PropTypes.string,
   departamento: PropTypes.string,
   municipio: PropTypes.string,
   handleChange: PropTypes.func,
   municipiosData: PropTypes.array,
   handleObtenerMunicipios: PropTypes.func,
-  numeroEstudiantes: PropTypes.string
+  limitInf: PropTypes.string,
+  limitSup: PropTypes.string,
+  puntaje: PropTypes.string,
+  probabilidad: PropTypes.object
 }
 
 const mapStateToProps = createStructuredSelector({
-  topColegios: makeSelectTopColegios(),
-  mejoresColegiosX: makeSelectmejoresColegiosX(),
-  mejoresColegiosY: makeSelectmejoresColegiosY(),
   periodo: makeSelectperiodo(),
-  topNumero: makeSelecttopNumero(),
+  limitInf: makeSelectlimitInf(),
   departamento: makeSelectdepartamento(),
   municipio: makeSelectmunicipio(),
   municipiosData: makeSelectmunicipiosData(),
-  numeroEstudiantes: makeSelectnumeroEstudiantes()
+  limitSup: makeSelectlimitSup(),
+  puntaje: makeSelectPuntaje(),
+  probabilidad: makeSelectProbabilidad()
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    handleObtenerTopColegios: () => dispatch(obtenerTopColegios()),
+    handleObtenerProbabilidad: () => dispatch(obtenerProbabilidad()),
     handleObtenerMunicipios: () => dispatch(obtenerMunicipios()),
     handleChange: (event) => dispatch(change(event.target))
   }
@@ -214,4 +212,4 @@ const withConnect = connect(
   mapDispatchToProps
 )
 
-export default compose(withConnect)(DashboardApp);
+export default compose(withConnect)(Probabilidad);
