@@ -3,8 +3,11 @@ import dashboardReducer from '../pages/DashboardApp/reducer'
 import diagramaDeCajaReducer from '../pages/DiagramaDeCaja/reducer'
 import desviacionReducer from '../pages/Desviacion/reducer'
 import promedioReducer from '../pages/Promedio/reducer'
+import desempenoReducer from '../pages/Desempenos/reducer'
 import prediccionReducer from '../pages/Prediccion/reducer'
 import probabilidadReducer from '../pages/Probabilidad/reducer'
+import registrosReducer from '../pages/Registros/reducer'
+import puntajesEstudiantesReducer from '../pages/PuntajesEstudiantes/reducer'
 
 const rootReducer = combineReducers({
     dashboardReducer,
@@ -12,6 +15,9 @@ const rootReducer = combineReducers({
     desviacionReducer,
     promedioReducer,
     prediccionReducer,
-    probabilidadReducer
+    probabilidadReducer,
+    registrosReducer,
+    desempenoReducer,
+    puntajesEstudiantesReducer
 })
 export default rootReducer;

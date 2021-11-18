@@ -2,7 +2,7 @@ import produce from 'immer'
 import { OBTENER_TOP_COLEGIOS_SUCCESS, CHANGE, OBTENER_MUNICIPIOS_SUCCESS } from './constants'
 
 export const initialState = {
-    topColegios: undefined,
+    topColegios: [],
     municipiosData: undefined,
     mejoresColegiosX: [],
     mejoresColegiosY: [],
@@ -18,7 +18,7 @@ const dashboardReducer = (state = initialState, action) =>
     produce(state, draft => {
         switch (action.type) {
             case OBTENER_TOP_COLEGIOS_SUCCESS:
-                draft.topColegios = action.payload
+                draft.topColegios = action.payload.response.mejoresColegios
                 const tempY = []
                 action.payload.response.mejoresColegios.forEach(colegio => tempY.push(colegio.nombre?.trim()))
                 draft.mejoresColegiosY = tempY.reverse()

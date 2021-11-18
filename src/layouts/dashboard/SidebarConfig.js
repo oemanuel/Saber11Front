@@ -14,6 +14,11 @@ const sidebarConfig = [
     icon: getIcon("vaadin:chart-3d")
   },
   {
+    title: 'Niveles de Desempeño',
+    path: '/dashboard/niveles',
+    icon: getIcon("carbon:chart-bar-stacked")
+  },
+  {
     title: 'Variables vs puntajes',
     path: '/dashboard/box',
     icon: getIcon("ic:baseline-candlestick-chart")
@@ -32,6 +37,16 @@ const sidebarConfig = [
     title: 'Calular probabilidad',
     path: '/dashboard/probability',
     icon: getIcon("mdi:file-percent")
+  },
+  {
+    title: 'Registros por colegio',
+    path: '/dashboard/registers',
+    icon: getIcon("si-glyph:file-box")
+  },
+  {
+    title: 'Distribución de puntajes',
+    path: '/dashboard/distribucion',
+    icon: getIcon("ic:outline-ssid-chart")
   }
 ];
 

@@ -7,11 +7,14 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 
 import DashboardApp from './pages/DashboardApp';
+import Desempenos from './pages/Desempenos'
 import DiagramaDeCaja from './pages/DiagramaDeCaja';
 import Desviacion from './pages/Desviacion';
 import Promedio from './pages/Promedio'
 import Prediccion from './pages/Prediccion'
 import Probabilidad from './pages/Probabilidad'
+import Registros from './pages/Registros'
+import Distribucion from './pages/PuntajesEstudiantes'
 
 import Products from './pages/Products';
 import Blog from './pages/Blog';
@@ -28,11 +31,14 @@ export default function Router() {
       children: [
         { path: '/', element: <Navigate to="/dashboard/ranking" replace /> },
         { path: 'ranking', element: <DashboardApp /> },
+        { path: 'niveles', element: <Desempenos /> },
         { path: 'box', element: <DiagramaDeCaja /> },
         { path: 'deviation', element: <Desviacion /> },
         { path: 'average', element: <Promedio /> },
         { path: 'prediction', element: <Prediccion /> },
         { path: 'probability', element: <Probabilidad /> },
+        { path: 'registers', element: <Registros /> },
+        { path: 'distribucion', element: <Distribucion /> },
         { path: 'user', element: <User /> },
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> }
