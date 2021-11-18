@@ -14,9 +14,10 @@ function obtenerTopColegios(consulta) {
 }
 function* TopColegiosSaga() {
     const auxMunicipio = yield select(makeSelectmunicipio())
+    const auxDepartamento = yield select(makeSelectdepartamento())
     const consulta = {
         periodo: yield select(makeSelectperiodo()),
-        departamento: yield select(makeSelectdepartamento()),
+        departamento: auxDepartamento === '' ? null : auxDepartamento,
         municipio: auxMunicipio === '' ? null : auxMunicipio,
         puntaje: yield select(makeSelectPuntaje())
     }
