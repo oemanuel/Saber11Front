@@ -20,6 +20,7 @@ import { obtenerTopColegios, change, obtenerMunicipios } from './actions'
 
 // material
 import { Box, Container, Card, Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
+import { DataGrid } from '@mui/x-data-grid';
 // components
 import Page from '../../components/Page';
 import { AppMejoresColegios } from '../../components/_dashboard/app';
@@ -41,7 +42,7 @@ export function DashboardApp({ topColegios,
   puntaje
 }) {
   useEffect(() => {
-    if (topColegios === undefined) {
+    if (topColegios === []) {
       handleObtenerTopColegios()
     }
   })
@@ -55,6 +56,29 @@ export function DashboardApp({ topColegios,
     arrayForSort = [...municipiosss]
     arrayForSort = arrayForSort.sort()
   }
+
+  let rows = [
+    ...topColegios.map((registro, index) => {
+      return {
+        ...registro,
+        id: index
+      }
+    }),
+  ];
+
+  const columns = [
+    { field: 'posicion', headerName: 'Posición', width: 100 },
+    { field: 'nombre', headerName: 'Nombre', width: 380 },
+    { field: 'puntajepromedio', headerName: 'Puntaje Promedio', width: 380 },
+    { field: 'departamento', headerName: 'Departamento', width: 380 },
+    { field: 'municipio', headerName: 'Municipio', width: 380 },
+    { field: 'area', headerName: 'Area', width: 380 },
+    { field: 'bilingue', headerName: 'Bilingue', width: 380 },
+    { field: 'caracter', headerName: 'Caracter', width: 380 },
+    { field: 'naturaleza', headerName: 'Naturaleza', width: 380 },
+    { field: 'numeroEstudiantes', headerName: 'N° Estudiantes', width: 380 },
+    { field: 'promedioEstratoFamiliaEstudiante', headerName: 'Promedio Estratos', width: 380 },
+  ]
   return (
     <Page title="Tu Saber 11°">
       <Container maxWidth="xl">
@@ -166,6 +190,13 @@ export function DashboardApp({ topColegios,
             </FormControl>
           </Box>
           <AppMejoresColegios x={mejoresColegiosX} y={mejoresColegiosY} />
+          <Box sx={{ my: 5 }} />
+          <Box sx={{ padding: '2rem', height: rows.length === 0 ? 200 : 600, width: '100%' }}>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+            />
+          </Box>
         </Card>
       </Container>
     </Page>
