@@ -6,10 +6,13 @@ import { desviacionSagas } from '../pages/Desviacion/saga'
 import { promedioSagas } from '../pages/Promedio/saga'
 import { desempenoSagas } from '../pages/Desempenos/saga'
 import { prediccionSagas } from '../pages/Prediccion/saga'
+import { registrosSagas } from '../pages/Registros/saga'
 import { puntajesEstudiantesSagas } from 'src/pages/PuntajesEstudiantes/saga'
 
+
 const superSagas = [...dashboardSagas, ...diagramaDeCajaSagas, ...desviacionSagas,
-...promedioSagas, ...prediccionSagas, ...desempenoSagas, ...puntajesEstudiantesSagas]
+...promedioSagas, ...prediccionSagas, ...desempenoSagas, ...puntajesEstudiantesSagas, ...registrosSagas]
+
 export default function* rootSaga() {
     yield all(
         superSagas.map(saga =>
