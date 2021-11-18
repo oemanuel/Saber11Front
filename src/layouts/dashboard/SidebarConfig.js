@@ -40,6 +40,11 @@ const sidebarConfig = [
     title: 'Promedios de puntajes',
     path: '/dashboard/average',
     icon: getIcon("ic:outline-ssid-chart")
+  },
+  {
+    title: 'Distribución de puntajes',
+    path: '/dashboard/distribucion',
+    icon: getIcon("ic:outline-ssid-chart")
   }
 ];
 
