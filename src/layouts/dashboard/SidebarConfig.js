@@ -22,6 +22,11 @@ const sidebarConfig = [
     icon: getIcon("vaadin:chart-3d")
   },
   {
+    title: 'Niveles de Desempeño',
+    path: '/dashboard/niveles',
+    icon: getIcon("carbon:chart-bar-stacked")
+  },
+  {
     title: 'Variables vs puntajes',
     path: '/dashboard/box',
     icon: getIcon("ic:baseline-candlestick-chart")
