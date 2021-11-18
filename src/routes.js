@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 
 import DashboardApp from './pages/DashboardApp';
+import Desempenos from './pages/Desempenos'
 import DiagramaDeCaja from './pages/DiagramaDeCaja';
 import Desviacion from './pages/Desviacion';
 import Promedio from './pages/Promedio'
@@ -26,6 +27,7 @@ export default function Router() {
       children: [
         { path: '/', element: <Navigate to="/dashboard/ranking" replace /> },
         { path: 'ranking', element: <DashboardApp /> },
+        { path: 'niveles', element: <Desempenos /> },
         { path: 'box', element: <DiagramaDeCaja /> },
         { path: 'deviation', element: <Desviacion /> },
         { path: 'average', element: <Promedio /> },

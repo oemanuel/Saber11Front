@@ -17,19 +17,24 @@ const sidebarConfig = [
     icon: getIcon("vaadin:chart-3d")
   },
   {
+    title: 'Niveles de Desempeño',
+    path: '/dashboard/niveles',
+    icon: getIcon("carbon:chart-bar-stacked")
+  },
+  {
     title: 'Variables vs puntajes',
     path: '/dashboard/box',
-    icon: getIcon("ic:baseline-candlestick-chart" )
+    icon: getIcon("ic:baseline-candlestick-chart")
   },
   {
     title: 'Desviación de puntajes',
     path: '/dashboard/deviation',
-    icon:getIcon("vaadin:spline-area-chart")
+    icon: getIcon("vaadin:spline-area-chart")
   },
   {
     title: 'Promedios de puntajes',
     path: '/dashboard/average',
-    icon:getIcon("ic:outline-ssid-chart" )
+    icon: getIcon("ic:outline-ssid-chart")
   }/*,
   {
     title: 'product',
